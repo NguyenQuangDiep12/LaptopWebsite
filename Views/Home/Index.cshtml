@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ECommerceApp.Model.Product>
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<div class="jumbotron bg-light p-5 rounded mb-4">
+    <h1 class="display-4">Chào mừng đến cửa hàng của chúng tôi!</h1>
+    <p class="lead">Khám phá những sản phẩm công nghệ mới nhất với giá tốt nhất</p>
+    <a class="btn btn-primary btn-lg" asp-controller="Products" asp-action="Index">
+        Xem sản phẩm <i class="bi bi-arrow-right"></i>
+    </a>
+</div>
+
+<h2 class="mb-4">Sản phẩm nổi bật</h2>
+<div class="row">
+    @foreach (var product in Model.Take(6))
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card product-card h-100">
+                <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name" style="height: 250px; object-fit: cover;">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="card-text text-muted small">@product.Category.Name</p>
+                    <p class="card-text">@product.Description</p>
+                    <div class="mt-auto">
+                        <p class="h5 text-danger mb-3">@product.Price.ToString("N0") ₫</p>
+                        <div class="d-flex gap-2">
+                            <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" 
+                               class="btn btn-outline-primary flex-fill">
+                                <i class="bi bi-eye"></i> Chi tiết
+                            </a>
+                            <button class="btn btn-primary flex-fill add-to-cart" data-product-id="@product.Id">
+                                <i class="bi bi-cart-plus"></i> Thêm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('.add-to-cart').click(function() {
+                var productId = $(this).data('product-id');
+                var button = $(this);
+                
+                $.ajax({
+                    url: '/Cart/AddToCart',
+                    type: 'POST',
+                    data: { productId: productId, quantity: 1 },
+                    success: function(response) {
+                        if (response.success) {
+                            button.html('<i class="bi bi-check"></i> Đã thêm');
+                            button.removeClass('btn-primary').addClass('btn-success');
+                            setTimeout(function() {
+                                button.html('<i class="bi bi-cart-plus"></i> Thêm');
+                                button.removeClass('btn-success').addClass('btn-primary');
+                            }, 2000);
+                        } else {
+                            alert(response.message);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}
