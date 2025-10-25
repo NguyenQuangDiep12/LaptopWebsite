@@ -1,14 +1,12 @@
 # Hướng Dẫn Setup Dự Án E-Commerce ASP.NET Core MVC
 
+![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-512BD4?style=flat-square&logo=dotnet&logoColor=white&logoWidth=20)
+![Entity Framework Core](https://img.shields.io/badge/EF%20Core-512BD4?style=flat-square&logo=entityframework&logoColor=white&logoWidth=20)
+![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=flat-square&logo=sql-server&logoColor=white&logoWidth=20)
+![Bootstrap 5](https://img.shields.io/badge/Bootstrap-7952B3?style=flat-square&logo=bootstrap&logoColor=white&logoWidth=20)
+![jQuery](https://img.shields.io/badge/jQuery-0769AD?style=flat-square&logo=jquery&logoColor=white&logoWidth=20)
+![Bootstrap Icons](https://img.shields.io/badge/Bootstrap%20Icons-7952B3?style=flat-square&logo=bootstrap&logoColor=white&logoWidth=20)
 ## Yêu Cầu Hệ Thống
-# Công nghệ sử dụng
-
-![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
-![Entity Framework Core](https://img.shields.io/badge/EF%20Core-512BD4?style=for-the-badge&logo=entityframework&logoColor=white)
-![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=for-the-badge&logo=sql-server&logoColor=white)
-![Bootstrap 5](https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
-![jQuery](https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white)
-![Bootstrap Icons](https://img.shields.io/badge/Bootstrap%20Icons-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
 
 - .NET 6.0 SDK trở lên
 - Visual Studio 2022 hoặc VS Code
