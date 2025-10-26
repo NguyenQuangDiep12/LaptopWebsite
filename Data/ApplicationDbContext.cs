@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using ECommerceApp.Model;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 
 namespace ECommerceApp.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -18,6 +21,51 @@ namespace ECommerceApp.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            //seed Roles
+            var adminRoleId = "1";
+            var userRoleId = "2";
+
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new IdentityRole
+                {
+                    Id = adminRoleId,
+                    Name = "Admin",
+                    NormalizedName = "ADMIN"
+                },
+                new IdentityRole
+                {
+                    Id = userRoleId,
+                    Name = "User",
+                    NormalizedName = "USER"
+                });
+            //seed Admin User
+            var hasher = new PasswordHasher<ApplicationUser>();
+            var adminUserId = "admin-user-id";
+
+            modelBuilder.Entity<ApplicationUser>().HasData(
+                new ApplicationUser
+                {
+                    Id = adminUserId,
+                    UserName = "admin@ecomerce.com",
+                    NormalizedUserName = "ADMIN@ECOMMERCE.COM",
+                    Email = "admin@ecommerce.com",
+                    NormalizedEmail = "ADMIN.ECOMMERCE.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, "Admin@123"),
+                    SecurityStamp = Guid.NewGuid().ToString(),
+                    FullName = "Administrator"
+                }
+            );
+
+            //Assign Admin Role to Admin Role
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string>
+                {
+                    RoleId = adminRoleId,
+                    UserId = adminUserId
+                }   
+             );
 
             //seed Categories
             modelBuilder.Entity<Category>().HasData(

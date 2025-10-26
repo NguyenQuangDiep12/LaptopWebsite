@@ -1,0 +1,123 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+    var stats = ViewBag.Statistics;
+}
+
+<div class="row mb-4">
+    <div class="col">
+        <h2><i class="bi bi-speedometer2"></i> Dashboard Quản Trị</h2>
+    </div>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        <i class="bi bi-check-circle"></i> @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<!-- Statistics Cards -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card text-white bg-primary">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-box"></i> Sản phẩm</h5>
+                <h2>@stats.TotalProducts</h2>
+                <a asp-action="Products" class="text-white">Xem chi tiết <i class="bi bi-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-white bg-success">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-tags"></i> Danh mục</h5>
+                <h2>@stats.TotalCategories</h2>
+                <a asp-action="Categories" class="text-white">Xem chi tiết <i class="bi bi-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-white bg-info">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-cart"></i> Đơn hàng</h5>
+                <h2>@stats.TotalOrders</h2>
+                <a asp-action="Orders" class="text-white">Xem chi tiết <i class="bi bi-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-white bg-warning">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-currency-dollar"></i> Doanh thu</h5>
+                <h2>@stats.TotalRevenue.ToString("N0") ₫</h2>
+                <small>Tổng doanh thu</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Alerts -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card border-warning">
+            <div class="card-body">
+                <h5 class="card-title text-warning">
+                    <i class="bi bi-exclamation-triangle"></i> Đơn hàng chờ xử lý
+                </h5>
+                <p class="h3">@stats.PendingOrders đơn hàng</p>
+                <a asp-action="Orders" class="btn btn-warning btn-sm">Xem ngay</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card border-danger">
+            <div class="card-body">
+                <h5 class="card-title text-danger">
+                    <i class="bi bi-box-seam"></i> Sản phẩm sắp hết hàng
+                </h5>
+                <p class="h3">@stats.LowStockProducts sản phẩm</p>
+                <a asp-action="Products" class="btn btn-danger btn-sm">Kiểm tra</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0"><i class="bi bi-lightning"></i> Thao tác nhanh</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <a asp-action="CreateProduct" class="btn btn-outline-primary w-100 mb-2">
+                            <i class="bi bi-plus-circle"></i> Thêm sản phẩm mới
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a asp-action="CreateCategory" class="btn btn-outline-success w-100 mb-2">
+                            <i class="bi bi-plus-circle"></i> Thêm danh mục
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a asp-action="Orders" class="btn btn-outline-info w-100 mb-2">
+                            <i class="bi bi-list"></i> Quản lý đơn hàng
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="/swagger" target="_blank" class="btn btn-outline-secondary w-100 mb-2">
+                            <i class="bi bi-code-square"></i> Swagger API
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

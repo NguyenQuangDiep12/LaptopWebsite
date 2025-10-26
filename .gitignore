@@ -20,6 +20,9 @@ obj/
 # Rider
 .idea/
 
+# Properties
+Properties/
+
 # ASP.NET Core files
 appsettings.Development.json
 appsettings.json
